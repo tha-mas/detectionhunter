@@ -21,11 +21,12 @@
 
 **Basic usage example:**
 
-![][image1]  
+<img width="777" height="473" alt="Image" src="https://github.com/user-attachments/assets/817abade-3c80-4fc1-a4be-8e0f1f85c5a1" />
+
 **Full execution flow (download cradle pattern):**
 
 Attacker hosts payload on remote server  
-⬇️  
+		⬇️  
 Victim machine: Net.WebClient.DownloadString() retrieves payload string  
 		⬇️  
 String passed directly to Invoke-Expression / IEX  
