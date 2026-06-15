@@ -26,14 +26,19 @@
 **Full execution flow (download cradle pattern):**
 
 Attacker hosts payload on remote server  
+		
 		⬇️  
 Victim machine: Net.WebClient.DownloadString() retrieves payload string  
+		
 		⬇️  
 String passed directly to Invoke-Expression / IEX  
+		
 		⬇️  
 PowerShell runtime executes string as code in current process context  
+		
 		⬇️  
 No script file written to disk  
+		
 		⬇️  
 Payload executes in memory — may spawn children, beacon to C2, etc.
 
