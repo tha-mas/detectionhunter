@@ -12,7 +12,6 @@
 6. [Telemetry Inventory](#6-telemetry-inventory)  
 7. [Detection Opportunities](#7-detection-opportunities)  
 8. [Validation Questions](#8-validation-questions)  
-9. [Weekly Deliverable Summary](#9-weekly-deliverable-summary)
 
 ## 1\. How Does the Technique Work?
 
@@ -22,47 +21,29 @@ PowerShell's `-EncodedCommand` flag (aliases: `-enc`, `-en`, `-e`) accepts a Bas
 
 **Basic encoding example:**
 
-\# Original command
+<img width="1060" height="290" alt="Image" src="https://github.com/user-attachments/assets/5dceabdc-8f66-419d-90d6-4961cab230b6" />
 
-$command \= 'Write-Host "Hello, Attacker."'
-
-\# Encode it (must be UTF-16LE for PowerShell)
-
-$bytes \= \[System.Text.Encoding\]::Unicode.GetBytes($command)
-
-$encoded \= \[Convert\]::ToBase64String($bytes)
-
-\# Execute via \-EncodedCommand
-
-powershell.exe \-EncodedCommand $encoded
 
 **Full execution flow:**
 
-Attacker prepares payload
 
-        ↓
+        Attacker prepares payload
+                ⬇️
+        Encodes payload as Base64 (UTF-16LE)
+                ⬇️
+        Passes encoded string via \-EncodedCommand flag
+                ⬇️
+        PowerShell.exe spawns
+                ⬇️
+        Runtime decodes Base64 in memory
+                ⬇️
+        Decoded commands execute within PowerShell context
+                ⬇️
+        No script file written to disk
 
-Encodes payload as Base64 (UTF-16LE)
 
-        ↓
 
-Passes encoded string via \-EncodedCommand flag
-
-        ↓
-
-PowerShell.exe spawns
-
-        ↓
-
-Runtime decodes Base64 in memory
-
-        ↓
-
-Decoded commands execute within PowerShell context
-
-        ↓
-
-No script file written to disk
+        
 
 ### Required Prerequisites
 
@@ -141,11 +122,12 @@ The most reliable initial signal. Captures:
 
 EventID: 1
 
-Image: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe
+`Image: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
 
-CommandLine: powershell.exe \-enc JABj...
+`CommandLine: powershell.exe \-enc JABj...`
 
-ParentImage: C:\\Windows\\System32\\cmd.exe
+`ParentImage: C:\\Windows\\System32\\cmd.exe`
+
 
 ⚠️ **Gap:** If Sysmon is not deployed or command-line logging is disabled in Group Policy, this event is not generated.
 
