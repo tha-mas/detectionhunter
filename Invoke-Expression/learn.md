@@ -20,7 +20,9 @@
 `Invoke-Expression` (alias: `IEX`) is a built-in PowerShell cmdlet that takes a string and executes it as PowerShell code. It is functionally equivalent to `eval()` in other languages — anything that resolves to a string can be executed.
 
 **Basic usage example:**
-<img width="777" height="473" alt="Image" src="https://github.com/user-attachments/assets/817abade-3c80-4fc1-a4be-8e0f1f85c5a1" /> 
+
+<img width="777" height="473" alt="Image" src="https://github.com/user-attachments/assets/817abade-3c80-4fc1-a4be-8e0f1f85c5a1" />
+
 **Full execution flow (download cradle pattern):**
 
 Attacker hosts payload on remote server  
