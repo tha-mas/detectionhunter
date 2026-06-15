@@ -140,7 +140,7 @@ AMSI intercepts PowerShell content before execution and passes it to the registe
 
 This makes AMSI a strong detection surface — when it is properly integrated and not bypassed.
 
-⚠️ **Gap:** AMSI integration depends on the security product. AMSI bypass techniques exist and are widely documented (see Week 5).
+⚠️ **Gap:** AMSI integration depends on the security product. AMSI bypass techniques exist and are widely documented (see later).
 
 ### Network Telemetry
 
@@ -172,7 +172,7 @@ Modern EDRs may detect IEX via:
 | "Our EDR sees PowerShell" | The EDR agent may observe the activity; the SIEM may not receive a normalized, searchable field containing the script block content |
 | "We blocked \-EncodedCommand, so PowerShell abuse is handled" | IEX does not require Base64 encoding. Blocking `-EncodedCommand` does not close the IEX gap |
 | "We have the logs" | Having raw logs, having a searchable index, and having an alerting rule on the right field are three separate operational problems |
-| "AMSI covers it" | AMSI can be bypassed (covered in Week 5\) and depends on security product integration quality |
+| "AMSI covers it" | AMSI can be bypassed (covered later\) and depends on security product integration quality |
 | "The analyst would catch unusual PowerShell" | Without a specific alert, PowerShell activity is rarely triaged proactively in high-volume SOC environments |
 
 ## 5\. ATT\&CK Mapping
@@ -194,7 +194,7 @@ Modern EDRs may detect IEX via:
 | PowerShell Module Logging | EID 4103 | Pipeline execution output | No | Does NOT capture script block content |
 | Sysmon Process Creation | EID 1 | Process launch with command-line args | No | Requires Sysmon deployment |
 | Windows Security | EID 4688 | Process creation (limited without config) | Partial | Requires cmd-line GPO setting |
-| AMSI | Vendor-dependent | Decoded content before execution | Yes (if product integrated) | Bypassable — see Week 5 |
+| AMSI | Vendor-dependent | Decoded content before execution | Yes (if product integrated) | Bypassable — see later 5 |
 | Network / DNS / Proxy | N/A | Outbound connections from powershell.exe | Varies | High signal when present |
 | EDR Behavioral | Vendor-dependent | Process behavior, API calls, memory | Depends on policy | Does not guarantee SIEM field delivery |
 
@@ -236,7 +236,7 @@ Host-level frequency of PowerShell network connections per day
 
 ## 8\. Validation Questions
 
-Answer these before closing Week 2:
+Answer these before closing:
 
 - [ ] Is **script block logging** (EID 4104\) enabled via GPO? Verify it applies to the correct OUs — not just the policy object existing.  
 - [ ] Run a test: execute `IEX "Write-Host 'DetectionHunter'"` in your lab environment. Did EID 4104 fire? What field contained the content?  
